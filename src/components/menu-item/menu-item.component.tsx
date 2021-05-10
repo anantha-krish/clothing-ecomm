@@ -1,23 +1,34 @@
-import { url } from "inspector";
-import { title } from "process";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./menu-item.component.scss";
 interface Props {
-  title: string;
+ title: string;
   imageUrl: string;
   size?: string;
+  linkUrl:string;
 }
 
-const MenuItem = ({ title, imageUrl, size = "" }: Props) => {
+const MenuItem = ({  imageUrl,
+  title,
+   size = "",
+   linkUrl, 
+  }: Props) => {
+    const history = useHistory();
+
   return (
     <div
+      className={`${size} menu-item`}
+      onClick={
+        ()=>{history.push(`/${linkUrl}`)}
+      }
+    >
+      <div className="background-image"
       style={{
         backgroundImage: `url(${imageUrl})`,
       }}
-      className={`${size} menu-item`}
-    >
+      />
       <div className="content">
-        <h1 className="title">{title}</h1>
+        <h1 className="title">{title.toUpperCase()}</h1>
         <span className="subtitle">SHOP NOW</span>
       </div>
     </div>
