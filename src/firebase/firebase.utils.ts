@@ -12,14 +12,37 @@ const config = {
   measurementId: "G-5FNX8CGEGF",
 };
 
-
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
+export const createUserProfileDocument = async (
+  userAuth: firebase.User | null,
+  additionalData?: any
+) => {
+  if (!userAuth) return;
+
+  const userDocRef = firestore.doc(`/users/${userAuth.uid}`);
+  const docSnapShot = await userDocRef.get();
+
+  if (!docSnapShot.exists) {
+    const { displayName, email } = userAuth;
+    try{
+    await userDocRef.set({
+      displayName,
+      email,
+      createdAt: new Date(),
+    });
+  }
+  catch(error){
+ console.log("unable to create user",error.message)
+  }
+}
+  return userDocRef;
+};
 const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt:'select_account'});
+provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
