@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component, FormEventHandler } from "react";
+import React, { ChangeEvent, Component } from "react";
 import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 import CustomButton from "../custom-button/customButton.component";
 import FormInput from "../form-input/form-input.component";
