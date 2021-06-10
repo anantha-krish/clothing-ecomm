@@ -1,20 +1,20 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
-import { AppDispatch } from "../../redux/store";
+import { selectCartItemsCount } from "../../redux/cart/cart.reselect";
+import { AppDispatch, RootState } from "../../redux/store";
 import "./styles.scss";
 
 const mapDispatchToProps=(dispatch:AppDispatch)=>({
     toggleCartHidden:()=>dispatch(toggleCartHidden())
 })
+const mapStateToProps=(state:RootState)=>({
+  itemCount:selectCartItemsCount(state)
+})
 
-interface Props {
-  itemCount?: number;
-  toggleCartHidden:()=>void;
 
-}
-const CartIcon = ({ itemCount = 0,toggleCartHidden }: Props) => {
+const CartIcon = ({ itemCount = 0,toggleCartHidden }: PropsFromRedux) => {
   return (
     <div className="cart-icon" onClick={toggleCartHidden}>
       <ShoppingIcon className="shopping-icon" />
@@ -23,5 +23,6 @@ const CartIcon = ({ itemCount = 0,toggleCartHidden }: Props) => {
   );
 };
 
-
-export default connect(null,mapDispatchToProps)(CartIcon);
+const connector = connect(mapStateToProps,mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>
+export default connector(CartIcon);
