@@ -6,6 +6,7 @@ import {
   selectCartTotalPrice,
 } from "../../redux/cart/cart.reselect";
 import { RootState } from "../../redux/store";
+import { IItem } from "../../types/IItem";
 import "./styles.scss";
 interface Props extends PropsFromRedux {}
 
@@ -29,7 +30,7 @@ const CheckoutPage = ({ cartItems, total }: Props) => {
           <span>Remove</span>
         </div>
       </div>
-        {cartItems.map((item) => (
+        {cartItems.map((item:IItem) => (
           <CheckoutItem key={item.id} cartItem={item} />
         ))}
         <div className="total">Rs. {total}</div>
