@@ -1,68 +1,29 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect, ConnectedProps } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import {
+  selectDirectorySections
+} from "../../redux/directory/directory.reselect";
+import { RootState } from "../../redux/store";
+import {
+  IDirectoryState
+} from "../../types/state/IDirectoryState";
 import MenuItem from "../menu-item/menu-item.component";
 import "./directory.styles.scss";
-interface Section {
-  title: string;
-  imageUrl: string;
-  size?: string;
-  id: number;
-  linkUrl: string;
-}
-interface Props {}
-interface State {
-  sections: Array<Section>;
-}
 
-export default class Directory extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      sections: [
-        {
-          title: "hats",
-          imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-          id: 1,
-          linkUrl: "shop/hats",
-        },
-        {
-          title: "jackets",
-          imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-          id: 2,
-          linkUrl: "shop/jackets",
-        },
-        {
-          title: "sneakers",
-          imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-          id: 3,
-          linkUrl: "shop/sneakers",
-        },
-        {
-          title: "womens",
-          imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-          size: "large",
-          id: 4,
-          linkUrl: "shop/womens",
-        },
-        {
-          title: "mens",
-          imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-          size: "large",
-          id: 5,
-          linkUrl: "shop/mens",
-        },
-      ],
-    };
-  }
+const Directory = ({ sections }: IReduxProps) => {
+  return (
+    <div className="directory-menu">
+      {sections.map(({ id, ...otherMenuProps }) => (
+        <MenuItem key={id} {...otherMenuProps} />
+      ))}
+    </div>
+  );
+};
+const mapStateToProps = createStructuredSelector<RootState, IDirectoryState>({
+  sections: selectDirectorySections,
+});
 
-  render() {
-    return (
-      <div className="directory-menu">
-        {this.state.sections.map(
-          ({ id, ...otherMenuProps}: Section) => (
-            <MenuItem key={id} {...otherMenuProps} />
-          )
-        )}
-      </div>
-    );
-  }
-}
+const connector = connect(mapStateToProps);
+type IReduxProps = ConnectedProps<typeof connector>;
+export default connector(Directory);
