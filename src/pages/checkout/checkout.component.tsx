@@ -1,6 +1,7 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
 import {
   selectCartItems,
   selectCartTotalPrice,
@@ -30,10 +31,16 @@ const CheckoutPage = ({ cartItems, total }: Props) => {
           <span>Remove</span>
         </div>
       </div>
-        {cartItems.map((item:IItem) => (
-          <CheckoutItem key={item.id} cartItem={item} />
-        ))}
-        <div className="total">Rs. {total}</div>
+      {cartItems.map((item: IItem) => (
+        <CheckoutItem key={item.id} cartItem={item} />
+      ))}
+      <div className="total">Rs. {total}</div>
+      <div className="test-warning">
+        * Please use below test payment card details for payments *
+        <br />
+        4242 4242 4242 4242 Exp: 01/22 CVV:123
+      </div>
+      <StripeCheckoutButton price={total} />
     </div>
   );
 };

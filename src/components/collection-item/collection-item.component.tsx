@@ -23,7 +23,7 @@ const CollectionItem = ({ item,addItemToCart }: Props) => {
         <span className="name">{item.name}</span>
         <div className="price">{item.price}</div>
       </div>
-      <CustomButton type="button" isInvertedColor onClick={()=>addItemToCart(item)}>
+      <CustomButton className="custom-button" type="button" isInvertedColor onClick={()=>addItemToCart(item)}>
         ADD TO CART
       </CustomButton>
     </div>
