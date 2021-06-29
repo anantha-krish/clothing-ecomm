@@ -6,4 +6,16 @@ export const selectShopCollections = createSelector(
   [selectShop],
   (shop) => shop.collections
 );
-export type ISelectShopCollection = ReturnType<typeof selectShop>
+export const selectShopCollectionsForPreview = createSelector(
+  [selectShopCollections],
+  (collections) => Object.keys(collections).map((key) => collections[key])
+);
+
+export const selectCollection = (collectionUrlParam: string) =>
+  createSelector(
+    [selectShopCollections],
+    (collections) => collections[`${collectionUrlParam}`]
+  );
+
+export type ISelectShopCollection = ReturnType<typeof selectShop>;
+export type ISelectCollection = ReturnType<typeof selectCollection>;

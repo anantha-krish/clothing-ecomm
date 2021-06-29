@@ -1,10 +1,10 @@
 import { connect, ConnectedProps } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import {
-  ISelectShopCollection,
-  selectShopCollections,
+  selectShopCollectionsForPreview
 } from "../../redux/shop/shop.selector";
 import { RootState } from "../../redux/store";
+import { IShopItem } from "../../types/state/IShopState";
 import CollectionPreview from "../collection-preview/collection-preview.component";
 import "./styles.scss";
 
@@ -19,9 +19,9 @@ const CollectionOverview = ({ collections }: Props) => {
 };
 const mapStateToProps = createStructuredSelector<
   RootState,
-  ISelectShopCollection
+  { collections: IShopItem[] }
 >({
-  collections: selectShopCollections,
+  collections: selectShopCollectionsForPreview,
 });
 
 const connector = connect(mapStateToProps);
