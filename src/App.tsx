@@ -16,7 +16,7 @@ interface Props {
   currentUser: any;
 }
 class App extends React.Component<Props> {
-  unsubscribe: any;
+  unsubscribe:any;
   componentDidMount() {
     const { setCurrentUser } = this.props;
     this.unsubscribe = auth.onAuthStateChanged(async (userAuth) => {
