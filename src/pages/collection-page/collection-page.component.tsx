@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import CollectionItem from "../../components/collection-item/collection-item.component";
 import { selectCollection } from "../../redux/shop/shop.selector";
 import { RootState } from "../../redux/store";
+import { IItem } from "../../types/IItem";
 import "./styles.scss";
 
 interface MatchParams {
@@ -11,17 +12,19 @@ interface MatchParams {
 }
 interface IProps extends RouteComponentProps<MatchParams> {}
 
-const CollectionPage = ({ match,collection }: RouteComponentProps<MatchParams> & IReduxProps) => {
- const {title,items} = collection;
-    return (
+const CollectionPage = ({
+  match,
+  collection,
+}: RouteComponentProps<MatchParams> & IReduxProps) => {
+  const { title, items } = collection;
+  return (
     <div className="collection-page">
-        <h2 className="title">{title}</h2>
-        <div className="items">
-            {
-                items?.map(item =>
-                    <CollectionItem key={item.id} item={item}/>)
-            }
-        </div>
+      <h2 className="title">{title}</h2>
+      <div className="items">
+        {items?.map((item: IItem) => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -65,11 +65,10 @@ export const convertCollectionsSnapShotToMap = (collections: any) => {
       items,
     };
   });
-  return transformedCollection.reduce((accumulator:any,collection:any)=>
-  {
-    accumulator[collection.title.toLowerCase()]=collection;
+  return transformedCollection.reduce((accumulator: any, collection: any) => {
+    accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
-  });
+  }, {});
 };
 
 const provider = new firebase.auth.GoogleAuthProvider();
