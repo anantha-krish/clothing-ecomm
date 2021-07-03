@@ -4,6 +4,8 @@ export interface IShopState {
   collections: {
     [key: string]: IShopItem;
   };
+  isLoading?:boolean;
+  errorMessage?:string;
 }
 export interface IShopItem {
   id: number;

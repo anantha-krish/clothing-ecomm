@@ -1,8 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { auth } from "../../firebase/firebase.utils";
-import { RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
+import { signOutStart } from "../../redux/user/user.actions";
 import { selectCurrentUser } from "../../redux/user/user.reselect";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import CartIcon from "../cart-icon/cart-icon.component";
@@ -10,14 +10,10 @@ import {
   HeaderContainer,
   LogoContainer,
   OptionContainer,
-  OptionLink,
+  OptionLink
 } from "./header.styles";
 
-interface Props {
-  currentUser: any;
-}
-
-const Header = ({ currentUser }: Props) => (
+const Header = ({ currentUser, signOut }: ReduxProps) => (
   <HeaderContainer>
     <LogoContainer to="/">
       <Logo className="logo" />
@@ -26,7 +22,7 @@ const Header = ({ currentUser }: Props) => (
       <OptionLink to="/shop">SHOP</OptionLink>
       <OptionLink to="/contact">CONTACT</OptionLink>
       {currentUser ? (
-        <OptionLink as="div" to="" onClick={() => auth.signOut()}>
+        <OptionLink as="div" to="" onClick={signOut}>
           SIGN OUT
         </OptionLink>
       ) : (
@@ -42,4 +38,9 @@ const mapStateToProps = (state: RootState) => ({
   currentUser: selectCurrentUser(state),
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  signOut: () => dispatch(signOutStart()),
+});
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type ReduxProps = ConnectedProps<typeof connector>;
+export default connector(Header);
