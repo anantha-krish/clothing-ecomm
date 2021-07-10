@@ -16,7 +16,7 @@ import {
 const Header = ({ currentUser, signOut }: ReduxProps) => (
   <HeaderContainer>
     <LogoContainer to="/">
-      <Logo className="logo" />
+      <Logo/>
     </LogoContainer>
     <OptionContainer>
       <OptionLink to="/shop">SHOP</OptionLink>

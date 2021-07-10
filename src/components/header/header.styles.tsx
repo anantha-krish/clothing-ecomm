@@ -10,8 +10,9 @@ export const HeaderContainer = styled.div`
 
 export const LogoContainer = styled(Link)`
   height: 100%;
-  width: 70px;
-  padding: 25px;
+  width: 50px;
+  padding: 5px;
+
 `;
 
 export const OptionContainer = styled.div`
@@ -23,7 +24,6 @@ export const OptionContainer = styled.div`
 `;
 
 export const OptionLink = styled(Link)`
-padding: 10px 15px;
-cursor: pointer;
+  padding: 10px 15px;
+  cursor: pointer;
 `;
-
