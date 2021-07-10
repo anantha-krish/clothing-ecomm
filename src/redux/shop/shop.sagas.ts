@@ -4,7 +4,7 @@ import {
   firestore
 } from "../../firebase/firebase.utils";
 import { IShopState } from "../../types/state/IShopState";
-import { fetchCollectionsFail, fetchCollectionsSuccess } from "./shop.actions";
+import { fetchCollectionsFail, fetchCollectionsStart, fetchCollectionsSuccess } from "./shop.actions";
 import ShopActionTypes from "./shop.types";
 
 export function* fetchCollectionsSaga() {
@@ -13,6 +13,7 @@ export function* fetchCollectionsSaga() {
 
 export function* fetchCollectionsAsync() {
   try {
+    yield put(fetchCollectionsStart());
     const collectionRef = firestore.collection("collections");
     const snapshot: Promise<any> = yield collectionRef.get();
     const collectionMap: IShopState["collections"] = yield call(

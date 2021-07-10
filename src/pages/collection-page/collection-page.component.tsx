@@ -16,6 +16,7 @@ const CollectionPage = ({
   match,
   collection,
 }: RouteComponentProps<MatchParams> & IReduxProps) => {
+  if(collection){
   const { title, items } = collection;
   return (
     <div className="collection-page">
@@ -26,7 +27,8 @@ const CollectionPage = ({
         ))}
       </div>
     </div>
-  );
+  );}
+  return null;
 };
 
 const mapStateToProps = (state: RootState, ownProps: IProps) => ({
