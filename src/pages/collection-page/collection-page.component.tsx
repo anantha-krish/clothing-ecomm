@@ -10,26 +10,28 @@ import "./styles.scss";
 interface MatchParams {
   collectionId: string;
 }
-interface IProps extends RouteComponentProps<MatchParams> {}
+interface IProps extends IReduxProps {}
 
-const CollectionPage = ({
-  match,
-  collection,
-}: RouteComponentProps<MatchParams> & IReduxProps) => {
-  const { title, items } = collection;
-  return (
-    <div className="collection-page">
-      <h2 className="title">{title}</h2>
-      <div className="items">
-        {items?.map((item: IItem) => (
-          <CollectionItem key={item.id} item={item} />
-        ))}
+const CollectionPage = ({ collection }: IProps) => {
+  if (collection) {
+    const { title, items } = collection;
+    return (
+      <div className="collection-page">
+        <h2 className="title">{title}</h2>
+        <div className="items">
+          {items?.map((item: IItem) => (
+            <CollectionItem key={item.id} item={item} />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else return null;
 };
 
-const mapStateToProps = (state: RootState, ownProps: IProps) => ({
+const mapStateToProps = (
+  state: RootState,
+  ownProps: RouteComponentProps<MatchParams>
+) => ({
   collection: selectCollection(ownProps.match.params.collectionId)(state),
 });
 
