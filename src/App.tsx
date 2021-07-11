@@ -2,8 +2,8 @@ import React from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
-import "./App.css";
 import Header from "./components/header/header.component";
+import { GlobalStyle } from "./global.style";
 import CheckoutPage from "./pages/checkout/checkout.component";
 import Contact from "./pages/contact/contact";
 import Homepage from "./pages/homepage/homepage.component";
@@ -23,6 +23,7 @@ class App extends React.Component<ReduxProps> {
     const { currentUser } = this.props;
     return (
       <BrowserRouter>
+        <GlobalStyle />
         <Header />
         <Switch>
           <Route exact path="/" component={Homepage} />
