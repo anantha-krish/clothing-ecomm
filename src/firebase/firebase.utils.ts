@@ -8,8 +8,8 @@ const config = {
   projectId: "ecom-app-ad847",
   storageBucket: "ecom-app-ad847.appspot.com",
   messagingSenderId: "280372117953",
-  appId: "1:280372117953:web:df85a9e333ff49851d6f40",
-  measurementId: "G-5FNX8CGEGF",
+  appId: "1:280372117953:web:5a4f5e82fe2a1acf1d6f40",
+  measurementId: "G-171VFEXKKX",
 };
 
 firebase.initializeApp(config);

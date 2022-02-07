@@ -1,6 +1,6 @@
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";
-import { ReactComponent as Logo } from "../../assets/crown.svg";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { AppDispatch, RootState } from "../../redux/store";
 import { signOutStart } from "../../redux/user/user.actions";
 import { selectCurrentUser } from "../../redux/user/user.reselect";
@@ -10,13 +10,13 @@ import {
   HeaderContainer,
   LogoContainer,
   OptionContainer,
-  OptionLink
+  OptionLink,
 } from "./header.styles";
 
 const Header = ({ currentUser, signOut }: ReduxProps) => (
   <HeaderContainer>
     <LogoContainer to="/">
-      <Logo/>
+      <Logo />
     </LogoContainer>
     <OptionContainer>
       <OptionLink to="/shop">SHOP</OptionLink>
